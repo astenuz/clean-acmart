@@ -277,6 +277,9 @@
   price: "$15.00",
   copyright: "cc",
 
+  // Page layout: "twocol" for two columns (default) or "singlecol" for a single column.
+  layout: "twocol",
+
   // Whether we are submitting as an anonymous version
   review: none,
 
@@ -294,6 +297,11 @@
   // The paper's content.
   body
 ) = {
+  assert(
+    layout in ("twocol", "singlecol"),
+    message: "layout must be either \"twocol\" or \"singlecol\", got: " + repr(layout),
+  )
+  let ncols = if layout == "singlecol" { 1 } else { 2 }
   set document(
     title: title, 
     author: if review == none { authors.map(a => to-string(a.name)) } else { () },
@@ -307,7 +315,7 @@
     paper: "us-letter",
     margin: (x: (8.5 - 7) / 2 * 1in, y: (11 - 9) / 2 * 1in),
     numbering: "1",
-    columns: 2,
+    columns: ncols,
   )
   set columns(gutter: 8mm)
   
@@ -389,7 +397,9 @@
   }
   
   show bibliography: it => {
-      colbreak(weak: true)
+      if layout == "twocol" {
+        colbreak(weak: true)
+      }
       it
   }
 
@@ -426,11 +436,13 @@
   }
   
   show bibliography: it => {
-    colbreak(weak: true)
+    if layout == "twocol" {
+      colbreak(weak: true)
+    }
     set text(size: .9em)
     it
   }
-  
+
   // Display the paper's contents.
   body
 }

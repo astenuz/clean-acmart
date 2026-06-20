@@ -96,6 +96,8 @@ The template will initialize your package with a sample call to the `acmart` fun
   // control max number of columns for authors and affiliation
   ncols-authors: 3,
   ncols-affiliations: 3,
+  // Page layout: "twocol" (default) or "singlecol".
+  layout: "twocol",
   conference: conference,
   doi: doi,
   copyright: "cc",
