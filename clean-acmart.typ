@@ -115,7 +115,9 @@
     must be honored. For all other uses, contact the
     owner/author(s).
   ] else if mode == "cc" [
-    #image("cc-by.svg", width: 25%)
+    // Absolute width so the badge stays the same size regardless of column
+    // width (a column is ~3.3in in twocol but the full ~7in block in singlecol).
+    #image("cc-by.svg", width: 0.85in)
     This work is licensed under a
     #link("https://creativecommons.org/licenses/by/4.0/")[
       Creative Commons Attribution International 4.0
